@@ -208,7 +208,6 @@ function drawModel( model,
     // Light Sources
 
 	var numLights = lightSources.length;
-  console.log(lightSources.length);
 	gl.uniform1i( gl.getUniformLocation(shaderProgram, "numLights"),
 		numLights );
 
@@ -526,7 +525,15 @@ function setEventListeners(){
 
 	// Button events
 
-	document.getElementById("XX-on-off-button").onclick = function(){
+  document.getElementById("soft").onclick = function(){
+    recursion_depth = 4;
+  };
+
+  document.getElementById("sharp").onclick = function(){
+    recursion_depth = 2;
+  };
+
+	document.getElementById("ZZ-on-off-button").onclick = function(){
 
 		// Switching on / off
 
@@ -534,33 +541,33 @@ function setEventListeners(){
 
 		for(var i = 0; i < sceneModels.length; i++ )
 	    {
-			if( sceneModels[i].rotXXOn ) {
+			if( sceneModels[i].rotZZOn ) {
 
-				sceneModels[i].rotXXOn = false;
+				sceneModels[i].rotZZOn = false;
 			}
 			else {
-				sceneModels[i].rotXXOn = true;
+				sceneModels[i].rotZZOn = true;
 			}
 		}
 	};
 
-	document.getElementById("XX-slower-button").onclick = function(){
+	document.getElementById("ZZ-slower-button").onclick = function(){
 
 		// For every model
 
 		for(var i = 0; i < sceneModels.length; i++ )
 	    {
-			sceneModels[i].rotXXSpeed *= 0.75;
+			sceneModels[i].rotZZSpeed *= 0.75;
 		}
 	};
 
-	document.getElementById("XX-faster-button").onclick = function(){
+	document.getElementById("ZZ-faster-button").onclick = function(){
 
 		// For every model
 
 		for(var i = 0; i < sceneModels.length; i++ )
 	    {
-			sceneModels[i].rotXXSpeed *= 1.25;
+			sceneModels[i].rotZZSpeed *= 1.25;
 		}
 	};
 

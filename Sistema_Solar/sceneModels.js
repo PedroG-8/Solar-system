@@ -50,9 +50,9 @@ function emptyModelFeatures() {
 
 	this.rotXXOn = false;
 
-	this.rotYYOn = true;
+	this.rotYYOn = false;
 
-	this.rotZZOn = false;
+	this.rotZZOn = true;
 
 	this.rotXXSpeed = 1.0;
 
@@ -175,102 +175,6 @@ function emptyModelFeatures() {
 		 0.25, -0.25, -0.25,
 ];
 
-// And their colour
-
-cube.colors = [
-
-		 // FRONT FACE
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-		 // TOP FACE
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-		 // BOTTOM FACE
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-		 // LEFT FACE
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-		 // RIGHT FACE
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-
-		 // BACK FACE
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-
-		 1.00,  0.00,  0.00,
-];
-
 	computeVertexNormals( cube.vertices, cube.normals );
 
 	return cube;
@@ -297,8 +201,8 @@ function sphereModel(subdivisionDepth) {
 
 var sceneModels = [];
 
-// Meter 5 para ficarem redondos
-var recursion_depth = 4;
+// Meter 4 para ficarem redondos
+var recursion_depth = 2;
 
 // Sistema solar
 // Sol
@@ -319,7 +223,7 @@ sceneModels[1].tz = 0;
 sceneModels[1].sx = 0.027;
 sceneModels[1].sy = 0.027;
 sceneModels[1].sz = 0.027;
-sceneModels[1].rotYYSpeed = 0.1;
+sceneModels[1].rotZZSpeed = 0.01;
 sceneModels[1].kAmbi = [ 0.5, 0.4, 0.0 ];
 sceneModels[1].kDiff = [ 0.5, 0.4, 0.0 ];
 
@@ -331,6 +235,8 @@ sceneModels[2].tz = 0;
 sceneModels[2].sx = 0.04;
 sceneModels[2].sy = 0.04;
 sceneModels[2].sz = 0.04;
+sceneModels[2].rotZZDir = -1;
+sceneModels[2].rotZZSpeed = 1.5
 sceneModels[2].kAmbi = [ 1, 0.3, 0.1 ];
 sceneModels[2].kDiff = [ 1, 0.3, 0.1 ];
 sceneModels[2].nPhong = 10;
@@ -343,7 +249,7 @@ sceneModels[3].tz = 0;
 sceneModels[3].sx = 0.045;
 sceneModels[3].sy = 0.045;
 sceneModels[3].sz = 0.045;
-sceneModels[3].rotYYSpeed = 0.3;
+sceneModels[3].rotZZSpeed = 1.5*242;
 sceneModels[3].kAmbi = [ 0.0, 0, 20 ];
 sceneModels[3].kDiff = [ 0.0, 0, 20 ];
 sceneModels[3].nPhong = 100;
@@ -368,6 +274,7 @@ sceneModels[5].tz = 0;
 sceneModels[5].sx = 0.07;
 sceneModels[5].sy = 0.07;
 sceneModels[5].sz = 0.07;
+sceneModels[5].rotZZSpeed = 1.5*242*2.4;
 sceneModels[5].kAmbi = [ 0.65, 0.74, 0.25 ];
 sceneModels[5].kDiff = [ 0.65, 0.74, 0.25 ];
 sceneModels[5].nPhong = 50;
@@ -380,6 +287,7 @@ sceneModels[6].tz = 0;
 sceneModels[6].sx = 0.067;
 sceneModels[6].sy = 0.067;
 sceneModels[6].sz = 0.067;
+sceneModels[6].rotZZSpeed = 1.5*242*2.4;
 sceneModels[6].kAmbi = [ 5, 3, 15 ];
 sceneModels[6].kDiff = [ 5, 3, 15 ];
 sceneModels[6].nPhong = 50;
@@ -392,9 +300,10 @@ sceneModels[7].tz = 0;
 sceneModels[7].sx = 0.04;
 sceneModels[7].sy = 0.04;
 sceneModels[7].sz = 0.04;
-sceneModels[7].nPhong = 50;
+sceneModels[7].rotZZSpeed = 1.5*242*1.4;
 sceneModels[7].kAmbi = [ 0.0, 3, 15 ];
 sceneModels[7].kDiff = [ 0.0, 3, 15 ];
+sceneModels[7].nPhong = 50;
 
 // Neptuno
 sceneModels.push(new sphereModel(recursion_depth));
@@ -404,5 +313,7 @@ sceneModels[8].tz = 0;
 sceneModels[8].sx = 0.03;
 sceneModels[8].sy = 0.03;
 sceneModels[8].sz = 0.03;
+sceneModels[8].rotZZSpeed = 1.5*242*1.5;
 sceneModels[8].kAmbi = [ 0.0, 0, 45 ];
 sceneModels[8].kDiff = [ 0.0, 0, 45 ];
+sceneModels[8].nPhong = 50;
