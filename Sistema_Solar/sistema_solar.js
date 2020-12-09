@@ -406,15 +406,15 @@ function animate() {
 	    }
     if( globalRotationZZ_ON ) {
 
-			globalAngleZZ1[0] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
-      globalAngleZZ1[1] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
-      globalAngleZZ1[2] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
-      globalAngleZZ1[3] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
-      globalAngleZZ1[4] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
-      globalAngleZZ1[5] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
-      globalAngleZZ1[6] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
-      globalAngleZZ1[7] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
-      globalAngleZZ1[8] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
+			globalAngleZZ1[0] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 100.0;
+      globalAngleZZ1[1] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 1000.0;
+      globalAngleZZ1[2] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 2545.0;
+      globalAngleZZ1[3] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 4147.0;
+      globalAngleZZ1[4] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 7806.0;
+      globalAngleZZ1[5] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 49192.0;
+      globalAngleZZ1[6] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 122192.0;
+      globalAngleZZ1[7] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 155542.0;
+      globalAngleZZ1[8] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 83120.0;
 	    }
 
 		// For every model --- Local rotations
