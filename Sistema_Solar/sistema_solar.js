@@ -359,7 +359,7 @@ function drawScene() {
 
 	// Instantianting all scene models
 
-	for(var i = 0; i < sceneModels.length; i++ )
+	for(var i = sceneModels.length-1; i >= 0; i-- )
 	{
 
     mvMatrix = mult( mvMatrix,
@@ -406,7 +406,7 @@ function animate() {
 	    }
     if( globalRotationZZ_ON ) {
 
-			globalAngleZZ1[0] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 100000.0;
+			globalAngleZZ1[0] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
       globalAngleZZ1[1] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
       globalAngleZZ1[2] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
       globalAngleZZ1[3] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
