@@ -208,7 +208,7 @@ function drawModel( model,
     // Light Sources
 
 	var numLights = lightSources.length;
-
+  console.log(lightSources.length);
 	gl.uniform1i( gl.getUniformLocation(shaderProgram, "numLights"),
 		numLights );
 
@@ -544,24 +544,6 @@ function setEventListeners(){
 		}
 	};
 
-	document.getElementById("XX-direction-button").onclick = function(){
-
-		// Switching the direction
-
-		// For every model
-
-		for(var i = 0; i < sceneModels.length; i++ )
-	    {
-			if( sceneModels[i].rotXXDir == 1 ) {
-
-				sceneModels[i].rotXXDir = -1;
-			}
-			else {
-				sceneModels[i].rotXXDir = 1;
-			}
-		}
-	};
-
 	document.getElementById("XX-slower-button").onclick = function(){
 
 		// For every model
@@ -582,116 +564,28 @@ function setEventListeners(){
 		}
 	};
 
-	document.getElementById("YY-on-off-button").onclick = function(){
+	document.getElementById("stop-translation").onclick = function(){
 
-		// Switching on / off
+		// Stopping the translation
 
 		// For every model
-
-		for(var i = 0; i < sceneModels.length; i++ )
-	    {
-			if( sceneModels[i].rotYYOn ) {
-
-				sceneModels[i].rotYYOn = false;
-			}
-			else {
-				sceneModels[i].rotYYOn = true;
-			}
-		}
+    if (globalRotationZZ_ON) {
+      globalRotationZZ_ON = 0;
+    }
+    else {
+      globalRotationZZ_ON = 1;
+    }
 	};
 
-	document.getElementById("YY-direction-button").onclick = function(){
-
-		// Switching the direction
+	document.getElementById("slower-translation").onclick = function(){
 
 		// For every model
-
-		for(var i = 0; i < sceneModels.length; i++ )
-	    {
-			if( sceneModels[i].rotYYDir == 1 ) {
-
-				sceneModels[i].rotYYDir = -1;
-			}
-			else {
-				sceneModels[i].rotYYDir = 1;
-			}
-		}
+    globalRotationZZ_SPEED *= 0.8;
 	};
 
-	document.getElementById("YY-slower-button").onclick = function(){
+	document.getElementById("faster-translation").onclick = function(){
 
-		// For every model
-
-		for(var i = 0; i < sceneModels.length; i++ )
-	    {
-			sceneModels[i].rotYYSpeed *= 0.75;
-		}
-	};
-
-	document.getElementById("YY-faster-button").onclick = function(){
-
-		// For every model
-
-		for(var i = 0; i < sceneModels.length; i++ )
-	    {
-			sceneModels[i].rotYYSpeed *= 1.25;
-		}
-	};
-
-	document.getElementById("ZZ-on-off-button").onclick = function(){
-
-		// Switching on / off
-
-		// For every model
-
-		for(var i = 0; i < sceneModels.length; i++ )
-	    {
-			if( sceneModels[i].rotZZOn ) {
-
-				sceneModels[i].rotZZOn = false;
-			}
-			else {
-				sceneModels[i].rotZZOn = true;
-			}
-		}
-	};
-
-	document.getElementById("ZZ-direction-button").onclick = function(){
-
-		// Switching the direction
-
-		// For every model
-
-		for(var i = 0; i < sceneModels.length; i++ )
-	    {
-			if( sceneModels[i].rotZZDir == 1 ) {
-
-				sceneModels[i].rotZZDir = -1;
-			}
-			else {
-				sceneModels[i].rotZZDir = 1;
-			}
-		}
-	};
-
-	document.getElementById("ZZ-slower-button").onclick = function(){
-
-		// For every model
-
-		for(var i = 0; i < sceneModels.length; i++ )
-	    {
-			sceneModels[i].rotZZSpeed *= 0.75;
-		}
-	};
-
-	document.getElementById("ZZ-faster-button").onclick = function(){
-
-		// For every model
-
-		for(var i = 0; i < sceneModels.length; i++ )
-	    {
-			sceneModels[i].rotZZSpeed *= 1.25;
-		}
+		globalRotationZZ_SPEED *= 1.2;
 	};
 }
 

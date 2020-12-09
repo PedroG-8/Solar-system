@@ -331,8 +331,9 @@ sceneModels[2].tz = 0;
 sceneModels[2].sx = 0.04;
 sceneModels[2].sy = 0.04;
 sceneModels[2].sz = 0.04;
-sceneModels[2].kAmbi = [ 0.75, 0.3, 0.1 ];
-sceneModels[2].kDiff = [ 0.75, 0.3, 0.1 ];
+sceneModels[2].kAmbi = [ 1, 0.3, 0.1 ];
+sceneModels[2].kDiff = [ 1, 0.3, 0.1 ];
+sceneModels[2].nPhong = 10;
 
 // Terra
 sceneModels.push(new sphereModel(recursion_depth));
@@ -343,8 +344,9 @@ sceneModels[3].sx = 0.045;
 sceneModels[3].sy = 0.045;
 sceneModels[3].sz = 0.045;
 sceneModels[3].rotYYSpeed = 0.3;
-sceneModels[3].kAmbi = [ 0.05, 0.6, 0.5 ];
-sceneModels[3].kDiff = [ 0.05, 0.6, 0.5 ];
+sceneModels[3].kAmbi = [ 0.0, 0, 20 ];
+sceneModels[3].kDiff = [ 0.0, 0, 20 ];
+sceneModels[3].nPhong = 100;
 
 // Marte
 sceneModels.push(new sphereModel(recursion_depth));
@@ -354,8 +356,9 @@ sceneModels[4].tz = 0;
 sceneModels[4].sx = 0.031;
 sceneModels[4].sy = 0.031;
 sceneModels[4].sz = 0.031;
-sceneModels[4].kAmbi = [ 0.55, 0.3, 0.1 ];
-sceneModels[4].kDiff = [ 0.55, 0.3, 0.1 ];
+sceneModels[4].kAmbi = [ 1, 0.3, 0.1 ];
+sceneModels[4].kDiff = [ 1, 0.3, 0.1 ];
+sceneModels[4].nPhong = 30;
 
 // Júpiter
 sceneModels.push(new sphereModel(recursion_depth));
@@ -365,8 +368,9 @@ sceneModels[5].tz = 0;
 sceneModels[5].sx = 0.07;
 sceneModels[5].sy = 0.07;
 sceneModels[5].sz = 0.07;
-sceneModels[5].kAmbi = [ 0.9, 0.7, 0.15 ];
-sceneModels[5].kDiff = [ 0.9, 0.7, 0.15 ];
+sceneModels[5].kAmbi = [ 0.65, 0.74, 0.25 ];
+sceneModels[5].kDiff = [ 0.65, 0.74, 0.25 ];
+sceneModels[5].nPhong = 50;
 
 // Saturno
 sceneModels.push(new sphereModel(recursion_depth));
@@ -376,8 +380,9 @@ sceneModels[6].tz = 0;
 sceneModels[6].sx = 0.067;
 sceneModels[6].sy = 0.067;
 sceneModels[6].sz = 0.067;
-sceneModels[6].kAmbi = [ 0.95, 0.8, 0.55 ];
-sceneModels[6].kDiff = [ 0.95, 0.8, 0.55 ];
+sceneModels[6].kAmbi = [ 5, 3, 15 ];
+sceneModels[6].kDiff = [ 5, 3, 15 ];
+sceneModels[6].nPhong = 50;
 
 // Urano
 sceneModels.push(new sphereModel(recursion_depth));
@@ -387,12 +392,10 @@ sceneModels[7].tz = 0;
 sceneModels[7].sx = 0.04;
 sceneModels[7].sy = 0.04;
 sceneModels[7].sz = 0.04;
-sceneModels[7].nPhong = 0;
-sceneModels[7].kAmbi = [ 0.4, 0.6, 1.0 ];
-sceneModels[7].kDiff = [ 0.4, 0.6, 1.0 ];
-sceneModels[7].kSpec = [ 0.7, 0.7, 0.7 ];
+sceneModels[7].nPhong = 50;
+sceneModels[7].kAmbi = [ 0.0, 3, 15 ];
+sceneModels[7].kDiff = [ 0.0, 3, 15 ];
 
-// rgba(137, 196, 244, 1)
 // Neptuno
 sceneModels.push(new sphereModel(recursion_depth));
 sceneModels[8].tx = 0.96;
@@ -401,5 +404,5 @@ sceneModels[8].tz = 0;
 sceneModels[8].sx = 0.03;
 sceneModels[8].sy = 0.03;
 sceneModels[8].sz = 0.03;
-sceneModels[8].kAmbi = [ 0.2, 0.6, 1.0 ];
-sceneModels[8].kDiff = [ 0.2, 0.6, 1.0 ];
+sceneModels[8].kAmbi = [ 0.0, 0, 45 ];
+sceneModels[8].kDiff = [ 0.0, 0, 45 ];
