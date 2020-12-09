@@ -27,16 +27,24 @@ var triangleVertexNormalBuffer = null;
 // The GLOBAL transformation parameters
 
 var globalAngleYY = 0.0;
+var globalAngleXX = 0.0;
+var globalAngleZZ1 = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
 
 var globalTz = 0.0;
 
 // GLOBAL Animation controls
 
 var globalRotationYY_ON = 0;
-
 var globalRotationYY_DIR = 1;
-
 var globalRotationYY_SPEED = 1;
+
+var globalRotationXX_ON = 0;
+var globalRotationXX_DIR = 1;
+var globalRotationXX_SPEED = 1;
+
+var globalRotationZZ_ON = 1;
+var globalRotationZZ_DIR = 1;
+var globalRotationZZ_SPEED = 1;
 
 // To allow choosing the way of drawing the model triangles
 
@@ -353,10 +361,16 @@ function drawScene() {
 
 	for(var i = 0; i < sceneModels.length; i++ )
 	{
+
+    mvMatrix = mult( mvMatrix,
+                   rotationZZMatrix( globalAngleZZ1[i] ) );
+
 		drawModel( sceneModels[i],
 			   mvMatrix,
 	           primitiveType );
 	}
+
+
 
 	// NEW - Counting the frames
 
@@ -385,6 +399,22 @@ function animate() {
 		if( globalRotationYY_ON ) {
 
 			globalAngleYY += globalRotationYY_DIR * globalRotationYY_SPEED * (90 * elapsed) / 1000.0;
+	    }
+    if( globalRotationXX_ON ) {
+
+			globalAngleXX += globalRotationXX_DIR * globalRotationXX_SPEED * (90 * elapsed) / 1000.0;
+	    }
+    if( globalRotationZZ_ON ) {
+
+			globalAngleZZ1[0] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 100000.0;
+      globalAngleZZ1[1] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
+      globalAngleZZ1[2] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
+      globalAngleZZ1[3] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
+      globalAngleZZ1[4] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
+      globalAngleZZ1[5] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
+      globalAngleZZ1[6] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
+      globalAngleZZ1[7] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
+      globalAngleZZ1[8] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 3000.0;
 	    }
 
 		// For every model --- Local rotations
