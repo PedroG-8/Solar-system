@@ -32,6 +32,19 @@ var globalAngleZZ1 = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
 
 var globalTz = 0.0;
 
+var initVertices = [sceneModels[0].vertices.slice(), sceneModels[1].vertices.slice(), sceneModels[2].vertices.slice(),
+sceneModels[3].vertices.slice(), sceneModels[4].vertices.slice(), sceneModels[5].vertices.slice(),
+sceneModels[6].vertices.slice(), sceneModels[7].vertices.slice(), sceneModels[8].vertices.slice()];
+var initNormals = [sceneModels[0].normals.slice(), sceneModels[1].normals.slice(), sceneModels[2].normals.slice(),
+sceneModels[3].normals.slice(), sceneModels[4].normals.slice(), sceneModels[5].normals.slice(),
+sceneModels[6].normals.slice(), sceneModels[7].normals.slice(), sceneModels[8].normals.slice()];
+
+
+// for (var i = 0; i < sceneModels.length; i++) {
+//   initVertices.push(sceneModels[i].vertices.slice());
+//   initNormals.push(sceneModels[i].normals.slice());
+// }
+
 // GLOBAL Animation controls
 
 var globalRotationYY_ON = 0;
@@ -52,7 +65,7 @@ var primitiveType = null;
 
 // To allow choosing the projection type
 
-var projectionType = 0;
+var projectionType = 1;
 
 // NEW --- The viewer position
 
@@ -492,10 +505,10 @@ function setEventListeners(){
 
 		switch(p){
 
-			case 0 : projectionType = 0;
+			case 0 : projectionType = 1;
 				break;
 
-			case 1 : projectionType = 1;
+			case 1 : projectionType = 0;
 				break;
 		}
 	});
@@ -526,11 +539,23 @@ function setEventListeners(){
 	// Button events
 
   document.getElementById("soft").onclick = function(){
-    recursion_depth = 4;
+    for(var i = 0; i < sceneModels.length; i++) {
+      sceneModels[i].vertices = initVertices[i].slice();
+      sceneModels[i].normals = initNormals[i].slice();
+      midPointRefinement(sceneModels[i].vertices, 2);
+      moveToSphericalSurface(sceneModels[i].vertices);
+      computeVertexNormals(sceneModels[i].vertices, sceneModels[i].normals );
+    }
   };
 
   document.getElementById("sharp").onclick = function(){
-    recursion_depth = 2;
+    for(var i = 0; i < sceneModels.length; i++) {
+      sceneModels[i].vertices = initVertices[i].slice();
+      sceneModels[i].normals = initNormals[i].slice();
+      midPointRefinement(sceneModels[i].vertices, 0);
+      moveToSphericalSurface(sceneModels[i].vertices);
+      computeVertexNormals(sceneModels[i].vertices, sceneModels[i].normals );
+    }
   };
 
 	document.getElementById("ZZ-on-off-button").onclick = function(){

@@ -210,10 +210,10 @@ sceneModels.push(new sphereModel(4));
 sceneModels[0].sx = 0.12;
 sceneModels[0].sy = 0.12;
 sceneModels[0].sz = 0.12;
-sceneModels[0].rotYYOn = false;
+sceneModels[0].rotZZOn = -1;
 sceneModels[0].kAmbi = [ 0.9, 0.4, 0.0 ];
 sceneModels[0].kDiff = [ 0.9, 0.4, 0.0 ];
-sceneModels[0].nPhong = 0;
+sceneModels[0].nPhong = 3;
 
 // Mercúrio
 sceneModels.push(new sphereModel(recursion_depth));
@@ -223,7 +223,7 @@ sceneModels[1].tz = 0;
 sceneModels[1].sx = 0.027;
 sceneModels[1].sy = 0.027;
 sceneModels[1].sz = 0.027;
-sceneModels[1].rotZZSpeed = 0.01;
+sceneModels[1].rotZZSpeed = 2;
 sceneModels[1].kAmbi = [ 0.5, 0.4, 0.0 ];
 sceneModels[1].kDiff = [ 0.5, 0.4, 0.0 ];
 
@@ -236,7 +236,7 @@ sceneModels[2].sx = 0.04;
 sceneModels[2].sy = 0.04;
 sceneModels[2].sz = 0.04;
 sceneModels[2].rotZZDir = -1;
-sceneModels[2].rotZZSpeed = 1.5
+sceneModels[2].rotZZSpeed = 1.5;
 sceneModels[2].kAmbi = [ 1, 0.3, 0.1 ];
 sceneModels[2].kDiff = [ 1, 0.3, 0.1 ];
 sceneModels[2].nPhong = 10;
@@ -262,6 +262,7 @@ sceneModels[4].tz = 0;
 sceneModels[4].sx = 0.031;
 sceneModels[4].sy = 0.031;
 sceneModels[4].sz = 0.031;
+sceneModels[4].rotZZSpeed = 1.5*242;
 sceneModels[4].kAmbi = [ 1, 0.3, 0.1 ];
 sceneModels[4].kDiff = [ 1, 0.3, 0.1 ];
 sceneModels[4].nPhong = 30;
