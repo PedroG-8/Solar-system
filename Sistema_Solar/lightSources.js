@@ -213,7 +213,7 @@ LightSource.prototype.setRotationSpeed = function( s ) {
 
 
 //----------------------------------------------------------------------------
-//
+
 //  Instantiating light sources
 //
 
@@ -221,12 +221,12 @@ var lightSources = [];
 
 lightSources.push( new LightSource() );
 
-lightSources[0].setPosition( 0.0, 0.0, 0.1, 0.0 );
+lightSources[0].setPosition( -0.0, 0.0, 0.1, 0.0 );
 
 lightSources[0].setIntensity( 1.0, 0.4, 0.05 );
 
 lightSources[0].setAmbIntensity( 1.0, 0.4, 0.05 );
 
-//lightSources[0].switchRotYYOn();
-
-//lightSources[0].setRotationSpeed( -0.5 );
+// lightSources[0].switchRotZZOn();
+//
+// lightSources[0].setRotationSpeed( 0.8 );

@@ -75,8 +75,8 @@ function emptyModelFeatures() {
 	this.kSpec = [ 0.7, 0.7, 0.7 ];
 
 	this.nPhong = 100;
-}
 
+}
 
 	function simpleCubeModel( ) {
 

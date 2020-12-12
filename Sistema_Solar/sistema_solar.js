@@ -354,15 +354,27 @@ function drawScene() {
 
 			// COMPLETE THE CODE FOR THE OTHER ROTATION AXES
 
-			if( lightSources[i].isRotYYOn() )
+			if( lightSources[i].isRotXXOn() )
+			{
+				lightSourceMatrix = mult(
+						lightSourceMatrix,
+						rotationXXMatrix( lightSources[i].getRotAngleXX() ) );
+			}
+      if( lightSources[i].isRotYYOn() )
 			{
 				lightSourceMatrix = mult(
 						lightSourceMatrix,
 						rotationYYMatrix( lightSources[i].getRotAngleYY() ) );
 			}
+      if( lightSources[i].isRotZZOn() )
+			{
+				lightSourceMatrix = mult(
+						lightSourceMatrix,
+						rotationZZMatrix( lightSources[i].getRotAngleZZ() ) );
+			}
 		}
 
-		// NEW Passing the Light Souree Matrix to apply
+		// NEW Passing the Light Source Matrix to apply
 
 		var lsmUniform = gl.getUniformLocation(shaderProgram, "allLights["+ String(i) + "].lightSourceMatrix");
 
@@ -461,7 +473,7 @@ function animate() {
   			}
 
   			if( lightSources[i].isRotYYOn() ) {
-          
+
   				var angle = lightSources[i].getRotAngleYY() + lightSources[i].getRotationSpeed() * (90 * elapsed) / 1000.0;
 
   				lightSources[i].setRotAngleYY( angle );
