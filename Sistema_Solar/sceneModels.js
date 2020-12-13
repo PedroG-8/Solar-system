@@ -76,6 +76,30 @@ function emptyModelFeatures() {
 
 	this.nPhong = 100;
 
+	this.isOn = 1;
+
+	this.position = [ -0.0, 0.0, 0.1, 0.0 ];
+
+	this.intensity = [ 1.0, 0.4, 0.05 ];
+
+	this.ambIntensity = [ 1.0, 0.4, 0.05 ];
+
+	this.lightZZOn = false;
+
+	this.l_rotationSpeed = 0.2;
+
+	this.rotAngleZZ = 0.0;
+
+	this.getRotAngleZZ = function() {
+
+		return this.rotAngleZZ;
+	}
+
+	this.setRotAngleZZ = function( angle ) {
+
+		this.rotAngleZZ = angle;
+	}
+
 }
 
 	function simpleCubeModel( ) {
@@ -206,7 +230,7 @@ var recursion_depth = 2;
 
 // Sistema solar
 // Sol
-sceneModels.push(new sphereModel(4));
+sceneModels.push(new sphereModel(recursion_depth));
 sceneModels[0].sx = 0.12;
 sceneModels[0].sy = 0.12;
 sceneModels[0].sz = 0.12;
@@ -279,6 +303,13 @@ sceneModels[5].rotZZSpeed = 1.5*242*2.4;
 sceneModels[5].kAmbi = [ 0.65, 0.74, 0.25 ];
 sceneModels[5].kDiff = [ 0.65, 0.74, 0.25 ];
 sceneModels[5].nPhong = 50;
+sceneModels[5].lightZZOn = true;
+sceneModels[5].position = [ -1.0, 0.0, 1.0, 0.0 ];
+sceneModels[5].intensity = [ 1.0, 0.4, 0.05 ];
+sceneModels[5].ambIntensity = [ 1.0, 0.4, 0.05 ];
+sceneModels[5].l_rotationSpeed = 2.8;
+
+
 
 // Saturno
 sceneModels.push(new sphereModel(recursion_depth));

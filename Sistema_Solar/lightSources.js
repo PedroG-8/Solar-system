@@ -47,7 +47,7 @@ function LightSource( ) {
 
 	// NEW --- Rotation speed factor - Allow different speeds
 
-	this. rotationSpeed = 1.0;
+	this.rotationSpeed = 1.0;
 }
 
 //----------------------------------------------------------------------------
@@ -221,12 +221,19 @@ var lightSources = [];
 
 lightSources.push( new LightSource() );
 
-lightSources[0].setPosition( -0.0, 0.0, 0.1, 0.0 );
-
-lightSources[0].setIntensity( 1.0, 0.4, 0.05 );
-
-lightSources[0].setAmbIntensity( 1.0, 0.4, 0.05 );
-
-// lightSources[0].switchRotZZOn();
+// lightSources[0].setPosition( -0.0, 0.0, 0.1, 0.0 );
 //
-// lightSources[0].setRotationSpeed( 0.8 );
+// lightSources[0].setIntensity( 1.0, 0.4, 0.05 );
+//
+// lightSources[0].setAmbIntensity( 1.0, 0.4, 0.05 );
+
+lightSources.push( new LightSource() );
+
+// lightSources[1].setPosition( -1.0, 0.0, 0.1, 0.0 );
+//
+// lightSources[1].setIntensity( 1.0, 1.8, 1.55 );
+//
+// lightSources[1].setAmbIntensity( 1.0, 0.4, 0.05 );
+// lightSources[1].switchRotZZOn();
+//
+// lightSources[1].setRotationSpeed( 0.8 );

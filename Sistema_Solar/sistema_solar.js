@@ -226,17 +226,17 @@ function drawModel( model,
 
 	//Light Sources
 
-	for(var i = 0; i < lightSources.length; i++ )
-	{
-		gl.uniform1i( gl.getUniformLocation(shaderProgram, "allLights[" + String(i) + "].isOn"),
-			lightSources[i].isOn );
+	// for(var i = 0; i < lightSources.length; i++ )
+	// {
+		gl.uniform1i( gl.getUniformLocation(shaderProgram, "allLights[" + String(0) + "].isOn"),
+			model.isOn );
 
-		gl.uniform4fv( gl.getUniformLocation(shaderProgram, "allLights[" + String(i) + "].position"),
-			flatten(lightSources[i].getPosition()) );
+		gl.uniform4fv( gl.getUniformLocation(shaderProgram, "allLights[" + String(0) + "].position"),
+			flatten(model.position) );
 
-		gl.uniform3fv( gl.getUniformLocation(shaderProgram, "allLights[" + String(i) + "].intensities"),
-			flatten(lightSources[i].getIntensity()) );
-    }
+		gl.uniform3fv( gl.getUniformLocation(shaderProgram, "allLights[" + String(0) + "].intensities"),
+			flatten(model.intensity) );
+    // }
 
 	// Drawing
 
@@ -344,55 +344,53 @@ function drawScene() {
 
 	// FOR EACH LIGHT SOURCE
 
-	for(var i = 0; i < lightSources.length; i++ )
-	{
-		// Animating the light source, if defined
-
-		var lightSourceMatrix = mat4();
-
-		if( !lightSources[i].isOff() ) {
-
-			// COMPLETE THE CODE FOR THE OTHER ROTATION AXES
-
-			if( lightSources[i].isRotXXOn() )
-			{
-				lightSourceMatrix = mult(
-						lightSourceMatrix,
-						rotationXXMatrix( lightSources[i].getRotAngleXX() ) );
-			}
-      if( lightSources[i].isRotYYOn() )
-			{
-				lightSourceMatrix = mult(
-						lightSourceMatrix,
-						rotationYYMatrix( lightSources[i].getRotAngleYY() ) );
-			}
-      if( lightSources[i].isRotZZOn() )
-			{
-				lightSourceMatrix = mult(
-						lightSourceMatrix,
-						rotationZZMatrix( lightSources[i].getRotAngleZZ() ) );
-			}
-		}
+	// for(var i = 0; i < lightSources.length; i++ )
+	// {
+	// 	// Animating the light source, if defined
+  //
+	// 	var lightSourceMatrix = mat4();
+  //
+	// 	if( !lightSources[i].isOff() ) {
+  //     if( lightSources[i].isRotZZOn() )
+	// 		{
+	// 			lightSourceMatrix = mult(
+	// 					lightSourceMatrix,
+	// 					rotationZZMatrix( lightSources[i].getRotAngleZZ() ) );
+	// 		}
+	// 	}
 
 		// NEW Passing the Light Source Matrix to apply
 
-		var lsmUniform = gl.getUniformLocation(shaderProgram, "allLights["+ String(i) + "].lightSourceMatrix");
-
-		gl.uniformMatrix4fv(lsmUniform, false, new Float32Array(flatten(lightSourceMatrix)));
-	}
+	// 	var lsmUniform = gl.getUniformLocation(shaderProgram, "allLights["+ String(i) + "].lightSourceMatrix");
+  //
+	// 	gl.uniformMatrix4fv(lsmUniform, false, new Float32Array(flatten(lightSourceMatrix)));
+	// }
 
 	// Instantianting all scene models
 
 	for(var i = sceneModels.length-1; i >= 0; i-- )
 	{
+    var lightSourceMatrix = mat4();
+    if( sceneModels[i].lightZZOn )
+     {
+       lightSourceMatrix = mult(
+           lightSourceMatrix,
+           rotationZZMatrix( sceneModels[i].getRotAngleZZ() ) );
+     }
+
 
     mvMatrix = mult( mvMatrix,
                    rotationZZMatrix( globalAngleZZ1[i] ) );
 
+     var lsmUniform = gl.getUniformLocation(shaderProgram, "allLights["+ String(0) + "].lightSourceMatrix");
+     gl.uniformMatrix4fv(lsmUniform, false, new Float32Array(flatten(lightSourceMatrix)));
+
 		drawModel( sceneModels[i],
 			   mvMatrix,
 	           primitiveType );
-	}
+
+
+  }
 
 
 
@@ -445,47 +443,45 @@ function animate() {
 
 		for(var i = 0; i < sceneModels.length; i++ )
 	    {
-			if( sceneModels[i].rotXXOn ) {
+			// if( sceneModels[i].rotXXOn ) {
+      //
+			// 	sceneModels[i].rotAngleXX += sceneModels[i].rotXXDir * sceneModels[i].rotXXSpeed * (90 * elapsed) / 1000.0;
+			// }
+      //
+			// if( sceneModels[i].rotYYOn ) {
+      //
+			// 	sceneModels[i].rotAngleYY += sceneModels[i].rotYYDir * sceneModels[i].rotYYSpeed * (90 * elapsed) / 1000.0;
+			// }
 
-				sceneModels[i].rotAngleXX += sceneModels[i].rotXXDir * sceneModels[i].rotXXSpeed * (90 * elapsed) / 1000.0;
-			}
+			// if( sceneModels[i].rotZZOn ) {
+      //
+			// 	sceneModels[i].rotAngleZZ += sceneModels[i].rotZZDir * sceneModels[i].rotZZSpeed * (90 * elapsed) / 1000.0;
+			// }
+      if( sceneModels[i].lightZZOn ) {
 
-			if( sceneModels[i].rotYYOn ) {
-
-				sceneModels[i].rotAngleYY += sceneModels[i].rotYYDir * sceneModels[i].rotYYSpeed * (90 * elapsed) / 1000.0;
-			}
-
-			if( sceneModels[i].rotZZOn ) {
-
-				sceneModels[i].rotAngleZZ += sceneModels[i].rotZZDir * sceneModels[i].rotZZSpeed * (90 * elapsed) / 1000.0;
-			}
+      	var angle = sceneModels[i].getRotAngleZZ() + sceneModels[i].l_rotationSpeed * (90 * elapsed) / 1000.0;
+      	sceneModels[i].setRotAngleZZ( angle );
+      }
 		}
 
 		// Rotating the light sources
 
-		for(var i = 0; i < lightSources.length; i++ )
-	    {
-        if( lightSources[i].isRotXXOn() ) {
-
-  				var angle = lightSources[i].getRotAngleXX() + lightSources[i].getRotationSpeed() * (90 * elapsed) / 1000.0;
-
-  				lightSources[i].setRotAngleXX( angle );
-  			}
-
-  			if( lightSources[i].isRotYYOn() ) {
-
-  				var angle = lightSources[i].getRotAngleYY() + lightSources[i].getRotationSpeed() * (90 * elapsed) / 1000.0;
-
-  				lightSources[i].setRotAngleYY( angle );
-  			}
-
-  			if( lightSources[i].isRotZZOn() ) {
-
-  				var angle = lightSources[i].getRotAngleZZ() + lightSources[i].getRotationSpeed() * (90 * elapsed) / 1000.0;
-
-  				lightSources[i].setRotAngleZZ( angle );
-  			}
-		}
+		// for(var i = 0; i < lightSources.length; i++ )
+	  //   {
+    //     if( lightSources[i].isRotXXOn() ) {
+    //
+  	// 			var angle = lightSources[i].getRotAngleXX() + lightSources[i].getRotationSpeed() * (90 * elapsed) / 1000.0;
+    //
+  	// 			lightSources[i].setRotAngleXX( angle );
+  	// 		}
+    //
+  	// 		if( lightSources[i].isRotYYOn() ) {
+    //
+  	// 			var angle = lightSources[i].getRotAngleYY() + lightSources[i].getRotationSpeed() * (90 * elapsed) / 1000.0;
+    //
+  	// 			lightSources[i].setRotAngleYY( angle );
+  	// 		}
+		// }
 }
 
 	lastTime = timeNow;
