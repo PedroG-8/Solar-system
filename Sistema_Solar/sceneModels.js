@@ -226,7 +226,7 @@ function sphereModel(subdivisionDepth) {
 var sceneModels = [];
 
 // Meter 4 para ficarem redondos
-var recursion_depth = 4;
+var recursion_depth = 2;
 
 // Sistema solar
 // Sol
@@ -238,6 +238,8 @@ sceneModels[0].rotZZOn = -1;
 sceneModels[0].kAmbi = [ 0.9, 0.4, 0.0 ];
 sceneModels[0].kDiff = [ 0.9, 0.4, 0.0 ];
 sceneModels[0].nPhong = 3;
+sceneModels[0].lightZZOn = false;
+sceneModels[0].position = [ 0.0, 0.0, 1.0, 0.0 ];
 
 // Mercúrio
 sceneModels.push(new sphereModel(recursion_depth));

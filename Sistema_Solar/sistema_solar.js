@@ -427,7 +427,7 @@ function animate() {
 			globalAngleXX += globalRotationXX_DIR * globalRotationXX_SPEED * (90 * elapsed) / 1000.0;
 	    }
     if( globalRotationZZ_ON ) {
-
+      original = globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 2000.0;
 			globalAngleZZ1[0] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 100.0;
       globalAngleZZ1[1] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 1000.0;
       globalAngleZZ1[2] += globalRotationZZ_DIR * globalRotationZZ_SPEED * (90 * elapsed) / 2545.0;
@@ -449,7 +449,7 @@ function animate() {
 			}
       if( sceneModels[i].lightZZOn ) {
 
-      	var angle = sceneModels[i].getRotAngleZZ() + sceneModels[i].l_rotationSpeed * (90 * elapsed) / 1000.0;
+      	var angle = sceneModels[i].getRotAngleZZ() + sceneModels[i].l_rotationSpeed * (90 * elapsed * original) / 1000.0;
       	sceneModels[i].setRotAngleZZ( angle );
       }
 		}
