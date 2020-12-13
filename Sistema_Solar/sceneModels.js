@@ -78,26 +78,26 @@ function emptyModelFeatures() {
 
 	this.isOn = 1;
 
-	this.position = [ -0.0, 0.0, 0.1, 0.0 ];
+	this.position = [ -1.0, 0.0, 1.0, 0.0 ];
 
 	this.intensity = [ 1.0, 0.4, 0.05 ];
 
 	this.ambIntensity = [ 1.0, 0.4, 0.05 ];
 
-	this.lightZZOn = false;
+	this.lightZZOn = true;
 
 	this.l_rotationSpeed = 0.2;
 
-	this.rotAngleZZ = 0.0;
+	this.l_rotAngleZZ = 0.0;
 
 	this.getRotAngleZZ = function() {
 
-		return this.rotAngleZZ;
+		return this.l_rotAngleZZ;
 	}
 
 	this.setRotAngleZZ = function( angle ) {
 
-		this.rotAngleZZ = angle;
+		this.l_rotAngleZZ = angle;
 	}
 
 }
@@ -226,7 +226,7 @@ function sphereModel(subdivisionDepth) {
 var sceneModels = [];
 
 // Meter 4 para ficarem redondos
-var recursion_depth = 2;
+var recursion_depth = 4;
 
 // Sistema solar
 // Sol
@@ -250,6 +250,8 @@ sceneModels[1].sz = 0.027;
 sceneModels[1].rotZZSpeed = 2;
 sceneModels[1].kAmbi = [ 0.5, 0.4, 0.0 ];
 sceneModels[1].kDiff = [ 0.5, 0.4, 0.0 ];
+sceneModels[1].nPhong = 50;
+sceneModels[1].l_rotationSpeed = 1.805;
 
 // Vénus
 sceneModels.push(new sphereModel(recursion_depth));
@@ -264,6 +266,7 @@ sceneModels[2].rotZZSpeed = 1.5;
 sceneModels[2].kAmbi = [ 1, 0.3, 0.1 ];
 sceneModels[2].kDiff = [ 1, 0.3, 0.1 ];
 sceneModels[2].nPhong = 10;
+sceneModels[2].l_rotationSpeed = 0.8;
 
 // Terra
 sceneModels.push(new sphereModel(recursion_depth));
@@ -277,6 +280,7 @@ sceneModels[3].rotZZSpeed = 1.5*242;
 sceneModels[3].kAmbi = [ 0.0, 0, 20 ];
 sceneModels[3].kDiff = [ 0.0, 0, 20 ];
 sceneModels[3].nPhong = 100;
+sceneModels[3].l_rotationSpeed = 0.42;
 
 // Marte
 sceneModels.push(new sphereModel(recursion_depth));
@@ -290,6 +294,7 @@ sceneModels[4].rotZZSpeed = 1.5*242;
 sceneModels[4].kAmbi = [ 1, 0.3, 0.1 ];
 sceneModels[4].kDiff = [ 1, 0.3, 0.1 ];
 sceneModels[4].nPhong = 30;
+sceneModels[4].l_rotationSpeed = 0.2;
 
 // Júpiter
 sceneModels.push(new sphereModel(recursion_depth));
@@ -303,11 +308,7 @@ sceneModels[5].rotZZSpeed = 1.5*242*2.4;
 sceneModels[5].kAmbi = [ 0.65, 0.74, 0.25 ];
 sceneModels[5].kDiff = [ 0.65, 0.74, 0.25 ];
 sceneModels[5].nPhong = 50;
-sceneModels[5].lightZZOn = true;
-sceneModels[5].position = [ -1.0, 0.0, 1.0, 0.0 ];
-sceneModels[5].intensity = [ 1.0, 0.4, 0.05 ];
-sceneModels[5].ambIntensity = [ 1.0, 0.4, 0.05 ];
-sceneModels[5].l_rotationSpeed = 2.8;
+sceneModels[5].l_rotationSpeed = 0.05;
 
 
 
@@ -323,6 +324,7 @@ sceneModels[6].rotZZSpeed = 1.5*242*2.4;
 sceneModels[6].kAmbi = [ 5, 3, 15 ];
 sceneModels[6].kDiff = [ 5, 3, 15 ];
 sceneModels[6].nPhong = 50;
+sceneModels[6].l_rotationSpeed = 0.03;
 
 // Urano
 sceneModels.push(new sphereModel(recursion_depth));
@@ -336,6 +338,7 @@ sceneModels[7].rotZZSpeed = 1.5*242*1.4;
 sceneModels[7].kAmbi = [ 0.0, 3, 15 ];
 sceneModels[7].kDiff = [ 0.0, 3, 15 ];
 sceneModels[7].nPhong = 50;
+sceneModels[7].l_rotationSpeed = 0.01;
 
 // Neptuno
 sceneModels.push(new sphereModel(recursion_depth));
@@ -349,3 +352,4 @@ sceneModels[8].rotZZSpeed = 1.5*242*1.5;
 sceneModels[8].kAmbi = [ 0.0, 0, 45 ];
 sceneModels[8].kDiff = [ 0.0, 0, 45 ];
 sceneModels[8].nPhong = 50;
+sceneModels[8].l_rotationSpeed = 0.005;

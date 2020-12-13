@@ -442,21 +442,11 @@ function animate() {
 		// For every model --- Local rotations
 
 		for(var i = 0; i < sceneModels.length; i++ )
-	    {
-			// if( sceneModels[i].rotXXOn ) {
-      //
-			// 	sceneModels[i].rotAngleXX += sceneModels[i].rotXXDir * sceneModels[i].rotXXSpeed * (90 * elapsed) / 1000.0;
-			// }
-      //
-			// if( sceneModels[i].rotYYOn ) {
-      //
-			// 	sceneModels[i].rotAngleYY += sceneModels[i].rotYYDir * sceneModels[i].rotYYSpeed * (90 * elapsed) / 1000.0;
-			// }
+    {
+			if( sceneModels[i].rotZZOn ) {
 
-			// if( sceneModels[i].rotZZOn ) {
-      //
-			// 	sceneModels[i].rotAngleZZ += sceneModels[i].rotZZDir * sceneModels[i].rotZZSpeed * (90 * elapsed) / 1000.0;
-			// }
+				sceneModels[i].rotAngleZZ += sceneModels[i].rotZZDir * sceneModels[i].rotZZSpeed * (90 * elapsed) / 1000.0;
+			}
       if( sceneModels[i].lightZZOn ) {
 
       	var angle = sceneModels[i].getRotAngleZZ() + sceneModels[i].l_rotationSpeed * (90 * elapsed) / 1000.0;
