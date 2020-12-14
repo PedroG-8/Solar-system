@@ -25,7 +25,11 @@ var triangleVertexPositionBuffer = null;
 var triangleVertexNormalBuffer = null;
 
 var initSizes = [0.12, 0.027, 0.04, 0.045, 0.031, 0.07, 0.067, 0.04, 0.03];
+var scaleSizes = [0.4, 0.0014, 0.0035, 0.0037, 0.0019, 0.04, 0.033, 0.015, 0.014];
 
+var init_tx = [0.0, 0.17, 0.25, 0.35, 0.44, 0.57, 0.74, 0.87, 0.96]
+var scale_tx = [0.0, 0.43, 0.46, 0.50, 0.60, 0.74, 0.85, 0.92, 0.96]
+var scale = 0;
 // The GLOBAL transformation parameters
 
 var globalAngleYY = 0.0;
@@ -524,7 +528,7 @@ function handleKeys() {
 
     for(var i = 0; i < sceneModels.length; i++) {
       sceneModels[i].sx *= 0.97;
-
+      sceneModels[i].tx *= 0.97;
       sceneModels[i].sz = sceneModels[i].sy = sceneModels[i].sx;
     }
 	}
@@ -534,7 +538,7 @@ function handleKeys() {
 
     for(var i = 0; i < sceneModels.length; i++) {
       sceneModels[i].sx *= 1.03;
-
+      sceneModels[i].tx *= 1.03;
       sceneModels[i].sz = sceneModels[i].sy = sceneModels[i].sx;
     }
 	}
@@ -675,6 +679,29 @@ function setEventListeners(){
 		}
 	};
 
+  document.getElementById("make-scale").onclick = function(){
+    if (!scale) {
+      for(var i = 0; i < sceneModels.length; i++ )
+  	  {
+  			sceneModels[i].sz = scaleSizes[i];
+        sceneModels[i].sy = scaleSizes[i];
+        sceneModels[i].sx = scaleSizes[i];
+        sceneModels[i].tx = scale_tx[i];
+  		}
+      scale = 1;
+    } else {
+        for(var i = 0; i < sceneModels.length; i++ )
+    	  {
+          sceneModels[i].sz = initSizes[i];
+          sceneModels[i].sy = initSizes[i];
+          sceneModels[i].sx = initSizes[i];
+          sceneModels[i].tx = init_tx[i];
+    		}
+        scale = 0;
+    }
+
+	};
+
   document.getElementById("reset").onclick = function(){
 
     for(var i = 0; i < sceneModels.length; i++ )
@@ -682,6 +709,7 @@ function setEventListeners(){
 			sceneModels[i].sz = initSizes[i];
       sceneModels[i].sy = initSizes[i];
       sceneModels[i].sx = initSizes[i];
+      sceneModels[i].tx = init_tx[i];
 		}
 	};
 }
