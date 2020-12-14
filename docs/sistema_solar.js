@@ -30,6 +30,7 @@ var scaleSizes = [0.4, 0.0014, 0.0035, 0.0037, 0.0019, 0.04, 0.033, 0.015, 0.014
 var init_tx = [0.0, 0.17, 0.25, 0.35, 0.44, 0.57, 0.74, 0.87, 0.96]
 var scale_tx = [0.0, 0.43, 0.46, 0.50, 0.60, 0.74, 0.85, 0.92, 0.96]
 var scale = 0;
+var side=0;
 // The GLOBAL transformation parameters
 
 var globalAngleYY = 0.0;
@@ -463,7 +464,7 @@ function animate() {
         if(angle!=0){
           numb[i]=angle;
         }
-      	sceneModels[i].setRotAngleZZ( angle );
+      	sceneModels[i].setRotAngleZZ( numb[i] );
       }
       else{
         sceneModels[i].setRotAngleZZ( numb[i] );
@@ -523,7 +524,7 @@ function outputInfos(){
 var currentlyPressedKeys = {};
 function handleKeys() {
 
-	if (currentlyPressedKeys[38]) {
+	if (currentlyPressedKeys[40]) {
 		// Arrow Up
 
     for(var i = 0; i < sceneModels.length; i++) {
@@ -532,7 +533,7 @@ function handleKeys() {
       sceneModels[i].sz = sceneModels[i].sy = sceneModels[i].sx;
     }
 	}
-	if (currentlyPressedKeys[40]) {
+	if (currentlyPressedKeys[38]) {
 
 		// Arrow Down
 
@@ -542,6 +543,28 @@ function handleKeys() {
       sceneModels[i].sz = sceneModels[i].sy = sceneModels[i].sx;
     }
 	}
+  if(side){
+    if (currentlyPressedKeys[37]) {
+  		// Arrow Up
+      if(sceneModels[0].tx > -0.9){
+        for(var i = 0; i < sceneModels.length; i++) {
+
+            sceneModels[i].tx -= 0.02;
+        }
+      }
+  	}
+
+    if (currentlyPressedKeys[39]) {
+  		// Arrow Up
+      if(sceneModels[0].tx < 0.9){
+        for(var i = 0; i < sceneModels.length; i++) {
+
+          sceneModels[i].tx += 0.02;
+        }
+      }
+  	}
+  }
+
 }
 
 //----------------------------------------------------------------------------
@@ -687,6 +710,7 @@ function setEventListeners(){
         sceneModels[i].sy = scaleSizes[i];
         sceneModels[i].sx = scaleSizes[i];
         sceneModels[i].tx = scale_tx[i];
+        //globalRotationZZ_ON = 0;
   		}
       scale = 1;
     } else {
@@ -696,6 +720,44 @@ function setEventListeners(){
           sceneModels[i].sy = initSizes[i];
           sceneModels[i].sx = initSizes[i];
           sceneModels[i].tx = init_tx[i];
+          //globalRotationZZ_ON = 1;
+    		}
+        scale = 0;
+    }
+
+	};
+
+  document.getElementById("compare-scale").onclick = function(){
+    side = 1;
+    if (!scale) {
+      for(var i = 0; i < sceneModels.length; i++ )
+  	  {
+  			sceneModels[i].sz = scaleSizes[i];
+        sceneModels[i].sy = scaleSizes[i];
+        sceneModels[i].sx = scaleSizes[i];
+        sceneModels[i].tx = scale_tx[i];
+        globalRotationZZ_ON = 0;
+        globalAngleZZ1 = [0,0,0,0,0,0,0,0,0]
+        sceneModels[i].position = [ 0.0, 0.0, 1.0, 0.0 ];
+        sceneModels[i].rotZZOn = false;
+        numb=[1,0,0,0,0,0,0,0,0]
+        sceneModels[i].setRotAngleZZ( numb[i] );
+
+
+
+  		}
+      scale = 1;
+    } else {
+      side=0;
+        for(var i = 0; i < sceneModels.length; i++ )
+    	  {
+          sceneModels[i].sz = initSizes[i];
+          sceneModels[i].sy = initSizes[i];
+          sceneModels[i].sx = initSizes[i];
+          sceneModels[i].tx = init_tx[i];
+          globalRotationZZ_ON = 1;
+          sceneModels[i].position = [ -2.0, 0.0, 0.5, 0.0 ];
+          sceneModels[i].rotZZOn = true;
     		}
         scale = 0;
     }
