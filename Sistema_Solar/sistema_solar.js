@@ -583,46 +583,6 @@ function setEventListeners(){
     }
   };
 
-	document.getElementById("ZZ-on-off-button").onclick = function(){
-
-		// Switching on / off
-
-		// For every model
-
-		for(var i = 0; i < sceneModels.length; i++ )
-	    {
-			if( sceneModels[i].rotZZOn ) {
-
-				sceneModels[i].rotZZOn = false;
-			}
-			else {
-				sceneModels[i].rotZZOn = true;
-			}
-		}
-	};
-
-	document.getElementById("ZZ-slower-button").onclick = function(){
-
-		// For every model
-
-		for(var i = 0; i < sceneModels.length; i++ )
-	    {
-			sceneModels[i].rotZZSpeed *= 0.75;
-      sceneModels[i].l_rotationSpeed *=0.75;
-		}
-	};
-
-	document.getElementById("ZZ-faster-button").onclick = function(){
-
-		// For every model
-
-		for(var i = 0; i < sceneModels.length; i++ )
-	    {
-			sceneModels[i].rotZZSpeed *= 1.25;
-      sceneModels[i].l_rotationSpeed *=1.25;
-		}
-	};
-
 	document.getElementById("stop-translation").onclick = function(){
 
 		// Stopping the translation
@@ -645,17 +605,37 @@ function setEventListeners(){
 
   		}
     }
+    for(var i = 0; i < sceneModels.length; i++ )
+	    {
+			if( sceneModels[i].rotZZOn ) {
+
+				sceneModels[i].rotZZOn = false;
+			}
+			else {
+				sceneModels[i].rotZZOn = true;
+			}
+		}
 	};
 
 	document.getElementById("slower-translation").onclick = function(){
 
 		// For every model
     globalRotationZZ_SPEED *= 0.8;
+    for(var i = 0; i < sceneModels.length; i++ )
+	    {
+			sceneModels[i].rotZZSpeed *= 0.75;
+      //sceneModels[i].l_rotationSpeed *=0.75;
+		}
 	};
 
 	document.getElementById("faster-translation").onclick = function(){
 
 		globalRotationZZ_SPEED *= 1.2;
+    for(var i = 0; i < sceneModels.length; i++ )
+	    {
+			sceneModels[i].rotZZSpeed *= 1.25;
+      //sceneModels[i].l_rotationSpeed *=1.25;
+		}
 	};
 }
 
