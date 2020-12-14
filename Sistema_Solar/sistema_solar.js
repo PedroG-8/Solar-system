@@ -371,12 +371,13 @@ function drawScene() {
 	for(var i = sceneModels.length-1; i >= 0; i-- )
 	{
     var lightSourceMatrix = mat4();
-    if( sceneModels[i].lightZZOn )
-     {
+    //if( sceneModels[i].lightZZOn )
+    // {
        lightSourceMatrix = mult(
            lightSourceMatrix,
            rotationZZMatrix( sceneModels[i].getRotAngleZZ() ) );
-     }
+    // }
+
 
 
     mvMatrix = mult( mvMatrix,
@@ -407,6 +408,7 @@ function drawScene() {
 // Animation --- Updating transformation parameters
 
 var lastTime = 0;
+var numb=[1,0,0,0,0,0,0,0,0]
 
 function animate() {
 
@@ -447,10 +449,21 @@ function animate() {
 
 				sceneModels[i].rotAngleZZ += sceneModels[i].rotZZDir * sceneModels[i].rotZZSpeed * (90 * elapsed) / 1000.0;
 			}
+
       if( sceneModels[i].lightZZOn ) {
 
-      	var angle = sceneModels[i].getRotAngleZZ() + sceneModels[i].l_rotationSpeed * (90 * elapsed * original) / 1000.0;
+      	var angle = sceneModels[i].getRotAngleZZ() + sceneModels[i].l_rotationSpeed * (90 * elapsed * original ) / 1000.0;
+
+        if(angle!=0){
+          numb[i]=angle;
+          console.log("ads"+numb[i]);
+        }
       	sceneModels[i].setRotAngleZZ( angle );
+      }
+      else{
+        console.log("oh"+numb[i]);
+        sceneModels[i].setRotAngleZZ( numb[i] );
+
       }
 		}
 
@@ -595,6 +608,7 @@ function setEventListeners(){
 		for(var i = 0; i < sceneModels.length; i++ )
 	    {
 			sceneModels[i].rotZZSpeed *= 0.75;
+      sceneModels[i].l_rotationSpeed *=0.75;
 		}
 	};
 
@@ -605,6 +619,7 @@ function setEventListeners(){
 		for(var i = 0; i < sceneModels.length; i++ )
 	    {
 			sceneModels[i].rotZZSpeed *= 1.25;
+      sceneModels[i].l_rotationSpeed *=1.25;
 		}
 	};
 
@@ -615,9 +630,20 @@ function setEventListeners(){
 		// For every model
     if (globalRotationZZ_ON) {
       globalRotationZZ_ON = 0;
+      for(var i = 1; i < sceneModels.length; i++ )
+  	    {
+  			sceneModels[i].lightZZOn = false;
+
+  		}
+
     }
     else {
       globalRotationZZ_ON = 1;
+      for(var i = 1; i < sceneModels.length; i++ )
+  	    {
+  			sceneModels[i].lightZZOn = true;
+
+  		}
     }
 	};
 
