@@ -24,6 +24,8 @@ var triangleVertexPositionBuffer = null;
 
 var triangleVertexNormalBuffer = null;
 
+var initSizes = [0.12, 0.027, 0.04, 0.045, 0.031, 0.07, 0.067, 0.04, 0.03];
+
 // The GLOBAL transformation parameters
 
 var globalAngleYY = 0.0;
@@ -456,12 +458,10 @@ function animate() {
 
         if(angle!=0){
           numb[i]=angle;
-          console.log("ads"+numb[i]);
         }
       	sceneModels[i].setRotAngleZZ( angle );
       }
       else{
-        console.log("oh"+numb[i]);
         sceneModels[i].setRotAngleZZ( numb[i] );
 
       }
@@ -499,6 +499,8 @@ function tick() {
 
 	requestAnimFrame(tick);
 
+  handleKeys();
+
 	drawScene();
 
 	animate();
@@ -514,11 +516,46 @@ function outputInfos(){
 
 }
 
+var currentlyPressedKeys = {};
+function handleKeys() {
+
+	if (currentlyPressedKeys[38]) {
+		// Arrow Up
+
+    for(var i = 0; i < sceneModels.length; i++) {
+      sceneModels[i].sx *= 0.97;
+
+      sceneModels[i].sz = sceneModels[i].sy = sceneModels[i].sx;
+    }
+	}
+	if (currentlyPressedKeys[40]) {
+
+		// Arrow Down
+
+    for(var i = 0; i < sceneModels.length; i++) {
+      sceneModels[i].sx *= 1.03;
+
+      sceneModels[i].sz = sceneModels[i].sy = sceneModels[i].sx;
+    }
+	}
+}
+
 //----------------------------------------------------------------------------
 
 function setEventListeners(){
 
     // Dropdown list
+
+    function handleKeyDown(event) {
+        currentlyPressedKeys[event.keyCode] = true;
+    }
+
+    function handleKeyUp(event) {
+        currentlyPressedKeys[event.keyCode] = false;
+    }
+
+	document.onkeydown = handleKeyDown;
+  document.onkeyup = handleKeyUp;
 
 	var projection = document.getElementById("projection-selection");
 
@@ -635,6 +672,16 @@ function setEventListeners(){
 	    {
 			sceneModels[i].rotZZSpeed *= 1.25;
       //sceneModels[i].l_rotationSpeed *=1.25;
+		}
+	};
+
+  document.getElementById("reset").onclick = function(){
+
+    for(var i = 0; i < sceneModels.length; i++ )
+	    {
+			sceneModels[i].sz = initSizes[i];
+      sceneModels[i].sy = initSizes[i];
+      sceneModels[i].sx = initSizes[i];
 		}
 	};
 }
