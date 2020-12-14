@@ -544,9 +544,9 @@ function handleKeys() {
     }
 	}
   if(side){
-    if (currentlyPressedKeys[37]) {
+    if (currentlyPressedKeys[39]) {
   		// Arrow Up
-      if(sceneModels[0].tx > -0.9){
+      if(sceneModels[8].tx > -0.9){
         for(var i = 0; i < sceneModels.length; i++) {
 
             sceneModels[i].tx -= 0.02;
@@ -554,7 +554,7 @@ function handleKeys() {
       }
   	}
 
-    if (currentlyPressedKeys[39]) {
+    if (currentlyPressedKeys[37]) {
   		// Arrow Up
       if(sceneModels[0].tx < 0.9){
         for(var i = 0; i < sceneModels.length; i++) {
@@ -742,13 +742,9 @@ function setEventListeners(){
         sceneModels[i].rotZZOn = false;
         numb=[1,0,0,0,0,0,0,0,0]
         sceneModels[i].setRotAngleZZ( numb[i] );
-
-
-
   		}
       scale = 1;
     } else {
-      side=0;
         for(var i = 0; i < sceneModels.length; i++ )
     	  {
           sceneModels[i].sz = initSizes[i];
@@ -760,6 +756,7 @@ function setEventListeners(){
           sceneModels[i].rotZZOn = true;
     		}
         scale = 0;
+        side = 0;
     }
 
 	};
@@ -768,11 +765,19 @@ function setEventListeners(){
 
     for(var i = 0; i < sceneModels.length; i++ )
 	    {
-			sceneModels[i].sz = initSizes[i];
-      sceneModels[i].sy = initSizes[i];
-      sceneModels[i].sx = initSizes[i];
-      sceneModels[i].tx = init_tx[i];
+        sceneModels[i].sz = initSizes[i];
+        sceneModels[i].sy = initSizes[i];
+        sceneModels[i].sx = initSizes[i];
+        sceneModels[i].tx = init_tx[i];
+        globalRotationZZ_ON = 1;
+        sceneModels[i].position = [ -2.0, 0.0, 0.5, 0.0 ];
+        sceneModels[i].rotZZOn = true;
+        globalAngleZZ1 = [0,0,0,0,0,0,0,0,0]
+        numb=[1,0,0,0,0,0,0,0,0]
+        sceneModels[i].setRotAngleZZ( numb[i] );
 		}
+    scale = 0;
+    side = 0;
 	};
 }
 
