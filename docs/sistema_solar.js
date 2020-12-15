@@ -30,6 +30,7 @@ var scaleSizes = [0.4, 0.0014, 0.0035, 0.0037, 0.0019, 0.04, 0.033, 0.015, 0.014
 var init_tx = [0.0, 0.17, 0.25, 0.35, 0.44, 0.57, 0.74, 0.87, 0.96]
 var scale_tx = [0.0, 0.43, 0.46, 0.50, 0.60, 0.74, 0.85, 0.92, 0.96]
 var scale = 0;
+var compare_scale = 0;
 var side=0;
 // The GLOBAL transformation parameters
 
@@ -543,7 +544,7 @@ function handleKeys() {
       sceneModels[i].sz = sceneModels[i].sy = sceneModels[i].sx;
     }
 	}
-  if(side && globalRotationZZ_ON == 0 && sceneModels[1].getRotAngleZZ()==0){
+  if(side && globalRotationZZ_ON == 0){
     if (currentlyPressedKeys[39]) {
   		// Arrow Up
       if(sceneModels[8].tx > -0.9){
@@ -654,7 +655,8 @@ function setEventListeners(){
 		// For every model
     if (globalRotationZZ_ON) {
       globalRotationZZ_ON = 0;
-      for(var i = 1; i < sceneModels.length; i++ )
+      document.getElementById("stop-translation").innerHTML = "ON";
+      for(var i = 0; i < sceneModels.length; i++ )
   	    {
   			sceneModels[i].lightZZOn = false;
 
@@ -663,6 +665,7 @@ function setEventListeners(){
     }
     else {
       globalRotationZZ_ON = 1;
+      document.getElementById("stop-translation").innerHTML = "OFF";
       for(var i = 1; i < sceneModels.length; i++ )
   	    {
   			sceneModels[i].lightZZOn = true;
@@ -704,6 +707,7 @@ function setEventListeners(){
 
   document.getElementById("make-scale").onclick = function(){
     if (!scale) {
+      document.getElementById("make-scale").innerHTML = "OFF";
       for(var i = 0; i < sceneModels.length; i++ )
   	  {
   			sceneModels[i].sz = scaleSizes[i];
@@ -714,6 +718,7 @@ function setEventListeners(){
   		}
       scale = 1;
     } else {
+        document.getElementById("make-scale").innerHTML = "ON";
         for(var i = 0; i < sceneModels.length; i++ )
     	  {
           sceneModels[i].sz = initSizes[i];
@@ -729,7 +734,13 @@ function setEventListeners(){
 
   document.getElementById("compare-scale").onclick = function(){
     side = 1;
-    if (!scale) {
+    if (!compare_scale) {
+      document.getElementById("stop-translation").setAttribute("disabled", "disabled");
+      document.getElementById("slower-translation").setAttribute("disabled", "disabled");
+      document.getElementById("faster-translation").setAttribute("disabled", "disabled");
+      document.getElementById("make-scale").setAttribute("disabled", "disabled");
+      document.getElementById("reset").setAttribute("disabled", "disabled");
+      document.getElementById("compare-scale").innerHTML = "OFF";
       for(var i = 0; i < sceneModels.length; i++ )
   	  {
   			sceneModels[i].sz = scaleSizes[i];
@@ -743,8 +754,16 @@ function setEventListeners(){
         numb=[1,0,0,0,0,0,0,0,0]
         sceneModels[i].setRotAngleZZ( numb[i] );
   		}
-      scale = 1;
+      compare_scale = 1;
     } else {
+        document.getElementById("stop-translation").removeAttribute("disabled");
+        document.getElementById("slower-translation").removeAttribute("disabled");
+        document.getElementById("faster-translation").removeAttribute("disabled");
+        document.getElementById("make-scale").removeAttribute("disabled");
+        document.getElementById("reset").removeAttribute("disabled");
+        document.getElementById("compare-scale").innerHTML = "ON";
+        document.getElementById("make-scale").innerHTML = "ON";
+        document.getElementById("stop-translation").innerHTML = "OFF";
         for(var i = 0; i < sceneModels.length; i++ )
     	  {
           sceneModels[i].sz = initSizes[i];
@@ -758,6 +777,7 @@ function setEventListeners(){
           }
     		}
         scale = 0;
+        compare_scale = 0;
         side = 0;
     }
 
