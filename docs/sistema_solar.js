@@ -167,6 +167,7 @@ function initBuffers( model ) {
     cubeVertexIndexBuffer.numItems = 216;
   }
   else {
+
     triangleVertexPositionBuffer = gl.createBuffer();
   	gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
   	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(model.vertices), gl.STATIC_DRAW);
