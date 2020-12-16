@@ -1,2 +1,2 @@
 # Projeto-CV
-Projeto da cadeira Computação Visual
+Projeto da cadeira de Computação Visual
