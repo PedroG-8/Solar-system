@@ -754,11 +754,25 @@ function setEventListeners(){
 	};
 
   document.getElementById("asteroid").onclick = function(){
-    if(asteroid==0){
-      asteroid=1;
+    if(asteroid == 0) {
+      document.getElementById("stop-translation").setAttribute("disabled", "disabled");
+      document.getElementById("slower-translation").setAttribute("disabled", "disabled");
+      document.getElementById("faster-translation").setAttribute("disabled", "disabled");
+      document.getElementById("make-scale").setAttribute("disabled", "disabled");
+      document.getElementById("compare-scale").setAttribute("disabled", "disabled");
+      document.getElementById("reset").setAttribute("disabled", "disabled");
+      document.getElementById("asteroid").innerHTML = "OFF";
+      asteroid = 1;
     }
     else{
-      asteroid=0;
+      document.getElementById("stop-translation").removeAttribute("disabled");
+      document.getElementById("slower-translation").removeAttribute("disabled");
+      document.getElementById("faster-translation").removeAttribute("disabled");
+      document.getElementById("make-scale").removeAttribute("disabled");
+      document.getElementById("compare-scale").removeAttribute("disabled");
+      document.getElementById("reset").removeAttribute("disabled");
+      document.getElementById("asteroid").innerHTML = "ON";
+      asteroid = 0;
     }
 	};
 }

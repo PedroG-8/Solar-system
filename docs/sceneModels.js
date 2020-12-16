@@ -368,8 +368,6 @@ sceneModels[5].kDiff = [ 0.65, 0.74, 0.25 ];
 sceneModels[5].nPhong = 50;
 sceneModels[5].l_rotationSpeed = 0.055;
 
-
-
 // Saturno
 sceneModels.push(new sphereModel(recursion_depth));
 sceneModels[6].tx = 0.74;
@@ -414,6 +412,6 @@ sceneModels[8].l_rotationSpeed = 0.013;
 
 // Asteroide
 asteroidModels = new simpleAsteroidModel();
-asteroidModels.sx=0.1;
-asteroidModels.sy=0.1;
-asteroidModels.sz=0.1;
+asteroidModels.sx=0.3;
+asteroidModels.sy=0.3;
+asteroidModels.sz=0.3;
