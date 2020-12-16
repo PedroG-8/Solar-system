@@ -39,6 +39,7 @@ var globalAngleXX = 0.0;
 var globalAngleZZ1 = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0];
 
 var globalTz = 0.0;
+var cubeVertexTextureCoordBuffer;
 
 var initVertices = [sceneModels[0].vertices.slice(), sceneModels[1].vertices.slice(), sceneModels[2].vertices.slice(),
 sceneModels[3].vertices.slice(), sceneModels[4].vertices.slice(), sceneModels[5].vertices.slice(),
@@ -52,7 +53,7 @@ sceneModels[6].normals.slice(), sceneModels[7].normals.slice(), sceneModels[8].n
 //   initVertices.push(sceneModels[i].vertices.slice());
 //   initNormals.push(sceneModels[i].normals.slice());
 // }
-
+var asteroid = 0;
 // GLOBAL Animation controls
 
 var globalRotationYY_ON = 0;
@@ -122,6 +123,33 @@ function countFrames() {
 // The WebGL code
 //
 
+//Textures
+function handleLoadedTexture(texture) {
+
+	gl.bindTexture(gl.TEXTURE_2D, texture);
+	gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texture.image);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+	gl.bindTexture(gl.TEXTURE_2D, null);
+}
+
+
+var webGLTexture;
+
+function initTexture() {
+
+	webGLTexture = gl.createTexture();
+	webGLTexture.image = new Image();
+	webGLTexture.image.onload = function () {
+		handleLoadedTexture(webGLTexture)
+	}
+
+	webGLTexture.image.src = "meteor.jpg";
+}
+
+//END OF Textures
+
 //----------------------------------------------------------------------------
 //
 //  Rendering
@@ -133,45 +161,58 @@ function initBuffers( model ) {
 
 	// Vertex Coordinates
 
-	triangleVertexPositionBuffer = gl.createBuffer();
-	gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
-	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(model.vertices), gl.STATIC_DRAW);
-	triangleVertexPositionBuffer.itemSize = 3;
-	triangleVertexPositionBuffer.numItems =  model.vertices.length / 3;
 
-	// Associating to the vertex shader
 
-	gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute,
-			triangleVertexPositionBuffer.itemSize,
-			gl.FLOAT, false, 0, 0);
+  if(asteroid){
+    cubeVertexPositionBuffer = gl.createBuffer();
+  	gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
+  	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(model.vertices), gl.STATIC_DRAW);
+  	cubeVertexPositionBuffer.itemSize = 3;
+  	cubeVertexPositionBuffer.numItems = model.vertices.length / 3;
 
-	// Vertex Normal Vectors
+  	// Textures
 
-	triangleVertexNormalBuffer = gl.createBuffer();
-	gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexNormalBuffer);
-	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array( model.normals), gl.STATIC_DRAW);
-	triangleVertexNormalBuffer.itemSize = 3;
-	triangleVertexNormalBuffer.numItems = model.normals.length / 3;
+    cubeVertexTextureCoordBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexTextureCoordBuffer);
+     	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(model.textureCoords), gl.STATIC_DRAW);
+    cubeVertexTextureCoordBuffer.itemSize = 2;
+    cubeVertexTextureCoordBuffer.numItems = 24;
 
-	// Associating to the vertex shader
+  	// Vertex indices
 
-	gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute,
-			triangleVertexNormalBuffer.itemSize,
-			gl.FLOAT, false, 0, 0);
+    cubeVertexIndexBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(model.cubeVertexIndices), gl.STATIC_DRAW);
+    cubeVertexIndexBuffer.itemSize = 1;
+    cubeVertexIndexBuffer.numItems = 216;
+  }
+  else{
+    triangleVertexPositionBuffer = gl.createBuffer();
+  	gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
+  	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(model.vertices), gl.STATIC_DRAW);
+  	triangleVertexPositionBuffer.itemSize = 3;
+  	triangleVertexPositionBuffer.numItems =  model.vertices.length / 3;
 
-  // Vertex Color Vectors
+  	// Associating to the vertex shader
 
-  // triangleVertexColorBuffer = gl.createBuffer();
-  // gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexColorBuffer);
-  // gl.bufferData(gl.ARRAY_BUFFER, new Float32Array( model.colors), gl.STATIC_DRAW);
-  // triangleVertexColorBuffer.itemSize = 3;
-	// triangleVertexColorBuffer.numItems = model.colors.length / 3;
-  //
-  // // Associating to the vertex shader
-  //
-  // gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute,
-  //   	triangleVertexNormalBuffer.itemSize,
-  //   	gl.FLOAT, false, 0, 0);
+  	gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute,
+  			triangleVertexPositionBuffer.itemSize,
+  			gl.FLOAT, false, 0, 0);
+
+  	// Vertex Normal Vectors
+
+  	triangleVertexNormalBuffer = gl.createBuffer();
+  	gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexNormalBuffer);
+  	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array( model.normals), gl.STATIC_DRAW);
+  	triangleVertexNormalBuffer.itemSize = 3;
+  	triangleVertexNormalBuffer.numItems = model.normals.length / 3;
+
+  	// Associating to the vertex shader
+
+  	gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute,
+  			triangleVertexNormalBuffer.itemSize,
+  			gl.FLOAT, false, 0, 0);
+  }
 }
 
 //----------------------------------------------------------------------------
@@ -211,6 +252,7 @@ function drawModel( model,
 	// Vertex Coordinates and Vertex Normal Vectors
 
 	initBuffers(model);
+
 
 	// Material properties
 
@@ -270,6 +312,26 @@ function drawModel( model,
 		gl.drawArrays(primitiveType, 0, triangleVertexPositionBuffer.numItems);
 
 	}
+
+  // NEW --- Textures
+  if(asteroid){
+    gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexTextureCoordBuffer);
+      gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, cubeVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, webGLTexture);
+
+      gl.uniform1i(shaderProgram.samplerUniform, 0);
+
+      // The vertex indices
+
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
+
+  	// Drawing the triangles --- NEW --- DRAWING ELEMENTS
+
+  	gl.drawElements(gl.TRIANGLES, cubeVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+  }
+
 }
 
 //----------------------------------------------------------------------------
@@ -393,10 +455,17 @@ function drawScene() {
 
      var lsmUniform = gl.getUniformLocation(shaderProgram, "allLights["+ String(0) + "].lightSourceMatrix");
      gl.uniformMatrix4fv(lsmUniform, false, new Float32Array(flatten(lightSourceMatrix)));
+    if(!asteroid){
+      drawModel( sceneModels[i],
+  			       mvMatrix,
+  	           primitiveType );
+    }
+    else{
+      drawModel( asteroidModels,
+  			       mvMatrix,
+  	           primitiveType );
+    }
 
-		drawModel( sceneModels[i],
-			   mvMatrix,
-	           primitiveType );
 
 
   }
@@ -804,6 +873,15 @@ function setEventListeners(){
     side = 0;
     globalRotationZZ_SPEED = 1;
 	};
+
+  document.getElementById("asteroid").onclick = function(){
+    if(asteroid==0){
+      asteroid=1;
+    }
+    else{
+      asteroid=0;
+    }
+	};
 }
 
 //----------------------------------------------------------------------------
@@ -862,6 +940,8 @@ function runWebGL() {
 	shaderProgram = initShaders( gl );
 
 	setEventListeners();
+
+  initTexture();
 
 	tick();		// A timer controls the rendering / animation
 
