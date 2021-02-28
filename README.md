@@ -1,3 +1,14 @@
 # 3D Solar System
-Projeto da cadeira de Computação Visual.
-Recomendamos o uso da Internet Explorer para correr a aplicação pois o uso é mais fluído.
+
+## 3D Solar System implementation in WebGL
+
+Features:
+- Planets rotation and translation
+- Phong ilumination
+- Option to see the planets at scale
+- An asteroid in whitch we tried to implement textures in a sphere (don't look)
+
+Developed with:
+
+- [Pedro Silva](https://github.com/pedromsilva99)
+
